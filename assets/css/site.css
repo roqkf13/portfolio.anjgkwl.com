@@ -510,18 +510,6 @@ a:focus-visible,
   margin: 0 0 0 6px;
 }
 
-.area__more summary {
-  width: fit-content;
-  color: var(--accent);
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.area__more[open] summary {
-  margin-bottom: 12px;
-}
-
 .area__list {
   display: grid;
   gap: 10px;
@@ -691,6 +679,215 @@ a:focus-visible,
   border-radius: 6px;
   background: var(--chip-bg);
   font-size: 0.9em;
+}
+
+/* 넓은 프로젝트 페이지(sections 가 있을 때) — 그림 7 : 글 3. 머리는 글 | 첫 화면, 절마다 글 | 그림 */
+.project--wide {
+  max-width: none;
+}
+
+.project--wide .ptop {
+  display: grid;
+  grid-template-columns: 3fr 7fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.project--wide .ptop__shot {
+  margin: 0;
+}
+
+.psec {
+  display: grid;
+  grid-template-columns: 3fr 7fr;
+  gap: 40px;
+  padding: 48px 0;
+  border-top: 1px solid var(--border);
+}
+
+.psec:first-of-type {
+  margin-top: 56px;
+}
+
+/* 오른쪽 그림이 길어도 제목이 따라온다 */
+.psec__text {
+  position: sticky;
+  top: 24px;
+  align-self: start;
+}
+
+.psec__text h2 {
+  margin: 0 0 12px;
+  font-size: 24px;
+  letter-spacing: -0.02em;
+  word-break: keep-all;
+}
+
+.psec__text p {
+  margin: 0;
+  color: var(--muted);
+  word-break: keep-all;
+}
+
+.psec__visual {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+  padding: 24px;
+  border-radius: var(--radius);
+  background: var(--chip-bg);
+}
+
+/* 판 위에 바로 놓인 상자 · 숫자 카드는 흰 바탕으로(카드 안에서는 원래대로) */
+.psec__visual > .mflow .mbox,
+.psec__visual > .mtiles .mbox,
+.psec__visual > .vcompare .mbox,
+.psec__visual > .vstats .vstat {
+  background: var(--surface);
+}
+
+.vcards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
+  gap: 12px;
+}
+
+.vcard {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding: 18px 20px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.vcard__title {
+  margin: 0;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+}
+
+.vstats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 8px;
+}
+
+.vstat {
+  display: grid;
+  align-content: start;
+  gap: 2px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg);
+}
+
+.vstat__num {
+  color: var(--accent);
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap; /* 「약 1분 30초」가 두 줄로 끊기지 않게 */
+}
+
+.vstat__label {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+  word-break: keep-all;
+}
+
+.vpeople {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+}
+
+.vperson {
+  display: grid;
+  gap: 2px;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+}
+
+.vperson strong {
+  font-size: 16px;
+}
+
+.vperson span {
+  color: var(--muted);
+  font-size: 13px;
+  word-break: keep-all;
+}
+
+.vperson--me {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.vcompare {
+  display: grid;
+  grid-template-columns: 1fr auto 1.6fr;
+  align-items: center;
+  gap: 8px 10px;
+}
+
+.vcompare__head {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.vcompare__to {
+  border-color: var(--accent);
+}
+
+.vnote {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  word-break: keep-all;
+}
+
+.vshot {
+  margin: 0;
+}
+
+@media (max-width: 860px) {
+  .project--wide .ptop,
+  .psec {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .project--wide .ptop__shot {
+    order: -1;
+  }
+
+  .psec__text {
+    position: static;
+  }
+}
+
+@media (max-width: 600px) {
+  .psec {
+    padding: 36px 0;
+  }
+
+  .psec__visual {
+    padding: 14px;
+  }
+
+  .vcard {
+    padding: 14px;
+  }
 }
 
 /* ── 좁은 화면 ───────────────────────────────────────────── */

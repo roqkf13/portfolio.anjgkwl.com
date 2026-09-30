@@ -1,0 +1,67 @@
+{%- comment -%}
+  그림 블록 — 프로젝트 페이지의 「그림 7 : 글 3」 칸을 그린다.
+  홈 「해 본 일」과 같은 부품(mflow · mtiles · mfact · mbar)에 숫자 카드 · 사람 · 카드 묶음 · 대응표 · 메모 · 그림을 더했다.
+  include.blocks: [{ type: flow | tiles | facts | bar | stats | people | cards | compare | note | image, ... }]
+  cards 는 카드마다 blocks 를 다시 가진다(이 파일을 한 번 더 부른다).
+{%- endcomment -%}
+{%- for b in include.blocks %}
+{%- case b.type %}
+{%- when "flow" %}
+<div class="mflow">
+  {%- for box in b.items %}
+  {%- unless forloop.first %}<span class="mflow__arrow" aria-hidden="true">→</span>{%- endunless %}
+  <span class="mbox">{{ box }}</span>
+  {%- endfor %}
+</div>
+{%- when "tiles" %}
+<div class="mtiles">
+  {%- for t in b.items %}<span class="mbox">{{ t }}</span>{%- endfor %}
+</div>
+{%- when "facts" %}
+<div class="mfacts">
+  {%- for f in b.items %}<span class="mfact">{{ f }}</span>{%- endfor %}
+</div>
+{%- when "bar" %}
+{%- assign pct = b.value | times: 100.0 | divided_by: b.total | round: 1 %}
+<div class="mbar">
+  <span class="mbar__label">{{ b.label }}</span>
+  <span class="mbar__track" aria-hidden="true"><span class="mbar__fill" style="width: {{ pct }}%"></span></span>
+  <span class="mbar__value">{{ b.value }} / {{ b.total }}</span>
+</div>
+{%- when "stats" %}
+<div class="vstats">
+  {%- for s in b.items %}
+  <div class="vstat"><span class="vstat__num">{{ s.num }}</span><span class="vstat__label">{{ s.label }}</span></div>
+  {%- endfor %}
+</div>
+{%- when "people" %}
+<div class="vpeople">
+  {%- for m in b.items %}
+  <div class="vperson{% if m.me %} vperson--me{% endif %}"><strong>{{ m.name }}</strong><span>{{ m.role }}</span></div>
+  {%- endfor %}
+</div>
+{%- when "cards" %}
+<div class="vcards">
+  {%- for c in b.items %}
+  <div class="vcard">
+    <h3 class="vcard__title">{{ c.title }}</h3>
+    {%- include vblocks.html blocks=c.blocks %}
+  </div>
+  {%- endfor %}
+</div>
+{%- when "compare" %}
+<div class="vcompare">
+  <span class="vcompare__head">{{ b.from_title }}</span><span></span><span class="vcompare__head">{{ b.to_title }}</span>
+  {%- for r in b.items %}
+  <span class="mbox">{{ r.from }}</span><span class="mflow__arrow" aria-hidden="true">→</span><span class="mbox vcompare__to">{{ r.to }}</span>
+  {%- endfor %}
+</div>
+{%- when "note" %}
+<p class="vnote">{{ b.text }}</p>
+{%- when "image" %}
+<figure class="shot vshot">
+  <img src="{{ b.src | relative_url }}" alt="{{ b.alt }}" loading="lazy">
+  {%- if b.caption %}<figcaption>{{ b.caption }}</figcaption>{%- endif %}
+</figure>
+{%- endcase %}
+{%- endfor %}

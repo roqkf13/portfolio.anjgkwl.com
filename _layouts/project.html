@@ -1,39 +1,61 @@
 ---
 layout: default
 ---
-<article class="project">
+{%- comment -%}
+  sections 가 있으면 「그림 7 : 글 3」 — 머리는 글 | 첫 화면, 절마다 왼쪽 글 | 오른쪽 그림(_includes/vblocks.html).
+  없으면 예전처럼 본문(Markdown)을 가운데 좁은 칸에 그린다.
+{%- endcomment -%}
+<article class="project{% if page.sections %} project--wide{% endif %}">
   <a class="back" href="{{ '/#projects' | relative_url }}">← 모든 프로젝트</a>
 
-  <header class="project__head">
-    <p class="eyebrow">{{ page.team }} · {{ page.role }} · {{ page.period }}</p>
-    <h1 class="project__title">{{ page.title }}</h1>
-    <p class="project__subtitle">{{ page.subtitle }}</p>
+  <div class="ptop">
+    <header class="project__head">
+      <p class="eyebrow">{{ page.team }} · {{ page.role }} · {{ page.period }}</p>
+      <h1 class="project__title">{{ page.title }}</h1>
+      <p class="project__subtitle">{{ page.subtitle }}</p>
 
-    <ul class="chips">
-      {%- for s in page.stack %}
-      <li>{{ s }}</li>
-      {%- endfor %}
-    </ul>
+      <ul class="chips">
+        {%- for s in page.stack %}
+        <li>{{ s }}</li>
+        {%- endfor %}
+      </ul>
 
-    {%- if page.links %}
-    <div class="actions">
-      {%- for l in page.links %}
-      <a class="btn{% if forloop.first %} btn--primary{% endif %}" href="{{ l.url }}">{{ l.label }} ↗</a>
-      {%- endfor %}
-    </div>
-    {%- for l in page.links %}{% if l.note %}
-    <p class="note">{{ l.label }} — {{ l.note }}</p>
-    {%- endif %}{% endfor %}
+      {%- if page.links %}
+      <div class="actions">
+        {%- for l in page.links %}
+        <a class="btn{% if forloop.first %} btn--primary{% endif %}" href="{{ l.url }}">{{ l.label }} ↗</a>
+        {%- endfor %}
+      </div>
+      {%- for l in page.links %}{% if l.note %}
+      <p class="note">{{ l.label }} — {{ l.note }}</p>
+      {%- endif %}{% endfor %}
+      {%- endif %}
+    </header>
+
+    {%- if page.thumbnail %}
+    <figure class="shot ptop__shot">
+      <img src="{{ page.thumbnail | relative_url }}" alt="{{ page.title }} 첫 화면">
+    </figure>
     {%- endif %}
-  </header>
+  </div>
 
-  {%- if page.thumbnail %}
-  <figure class="shot">
-    <img src="{{ page.thumbnail | relative_url }}" alt="{{ page.title }} 첫 화면">
-  </figure>
-  {%- endif %}
-
+  {%- if page.sections %}
+  {%- for s in page.sections %}
+  <section class="psec" aria-labelledby="psec-{{ forloop.index }}">
+    <div class="psec__text">
+      <h2 id="psec-{{ forloop.index }}">{{ s.title }}</h2>
+      {%- if s.text %}
+      <p>{{ s.text }}</p>
+      {%- endif %}
+    </div>
+    <div class="psec__visual">
+      {%- include vblocks.html blocks=s.blocks %}
+    </div>
+  </section>
+  {%- endfor %}
+  {%- else %}
   <div class="prose">
     {{ content }}
   </div>
+  {%- endif %}
 </article>

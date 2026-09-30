@@ -104,14 +104,11 @@ layout: default
         <p class="area__summary">{{ a.summary }}</p>
         <p class="area__at">{%- for t in a.at %}<span class="tag">{{ t }}</span>{%- endfor %}</p>
       </div>
-      <details class="area__more">
-        <summary>자세히</summary>
-        <ul class="area__list">
-          {%- for it in a.items %}
-          <li><span class="tag">{{ it.at }}</span>{{ it.text }}</li>
-          {%- endfor %}
-        </ul>
-      </details>
+      <ul class="area__list">
+        {%- for it in a.items %}
+        <li><span class="tag">{{ it.at }}</span>{{ it.text }}</li>
+        {%- endfor %}
+      </ul>
     </article>
     {%- endfor %}
   </div>
