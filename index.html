@@ -1,0 +1,89 @@
+---
+layout: default
+---
+{%- assign p = site.data.profile -%}
+
+<section class="hero">
+  {%- if p.role != "" %}
+  <p class="eyebrow">{{ p.role }}</p>
+  {%- endif %}
+  <h1 class="hero__name">{{ p.name }}</h1>
+  <p class="hero__headline">{{ p.headline }}</p>
+  {%- if p.intro != "" %}
+  <p class="hero__intro">{{ p.intro }}</p>
+  {%- endif %}
+  {%- if p.github != "" or p.email != "" %}
+  <div class="actions">
+    {%- if p.github != "" %}
+    <a class="btn btn--primary" href="{{ p.github }}">GitHub ↗</a>
+    {%- endif %}
+    {%- if p.email != "" %}
+    <a class="btn" href="mailto:{{ p.email }}">이메일</a>
+    {%- endif %}
+  </div>
+  {%- endif %}
+</section>
+
+<section class="section" aria-labelledby="skills-title">
+  <h2 class="section__title" id="skills-title">기술</h2>
+  <dl class="skills">
+    {%- for g in p.skills %}
+    <div class="skills__row">
+      <dt>{{ g.group }}</dt>
+      <dd>
+        <ul class="chips">
+          {%- for s in g.items %}
+          <li>{{ s }}</li>
+          {%- endfor %}
+        </ul>
+      </dd>
+    </div>
+    {%- endfor %}
+  </dl>
+</section>
+
+{%- if p.experience %}
+<section class="section" id="experience" aria-labelledby="experience-title">
+  <h2 class="section__title" id="experience-title">해 본 일</h2>
+  {%- if p.experience_note %}
+  <p class="section__lead">{{ p.experience_note }}</p>
+  {%- endif %}
+  <div class="areas">
+    {%- for a in p.experience %}
+    <article class="area">
+      <h3 class="area__title">{{ a.area }}</h3>
+      <ul class="area__list">
+        {%- for it in a.items %}
+        <li><span class="tag">{{ it.at }}</span>{{ it.text }}</li>
+        {%- endfor %}
+      </ul>
+    </article>
+    {%- endfor %}
+  </div>
+</section>
+{%- endif %}
+
+<section class="section" id="projects" aria-labelledby="projects-title">
+  <h2 class="section__title" id="projects-title">프로젝트</h2>
+  <div class="cards">
+    {%- assign projects = site.projects | sort: "order" %}
+    {%- for pr in projects %}
+    <a class="card" href="{{ pr.url | relative_url }}">
+      {%- if pr.thumbnail %}
+      <img class="card__img" src="{{ pr.thumbnail | relative_url }}" alt="" loading="lazy">
+      {%- endif %}
+      <div class="card__body">
+        <p class="eyebrow">{{ pr.team }} · {{ pr.role }}</p>
+        <h3 class="card__title">{{ pr.title }}</h3>
+        <p class="card__summary">{{ pr.summary }}</p>
+        <ul class="chips chips--sm">
+          {%- for s in pr.stack limit: 5 %}
+          <li>{{ s }}</li>
+          {%- endfor %}
+        </ul>
+        <p class="card__period">{{ pr.period }}</p>
+      </div>
+    </a>
+    {%- endfor %}
+  </div>
+</section>

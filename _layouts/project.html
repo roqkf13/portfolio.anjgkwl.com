@@ -1,0 +1,39 @@
+---
+layout: default
+---
+<article class="project">
+  <a class="back" href="{{ '/#projects' | relative_url }}">← 모든 프로젝트</a>
+
+  <header class="project__head">
+    <p class="eyebrow">{{ page.team }} · {{ page.role }} · {{ page.period }}</p>
+    <h1 class="project__title">{{ page.title }}</h1>
+    <p class="project__subtitle">{{ page.subtitle }}</p>
+
+    <ul class="chips">
+      {%- for s in page.stack %}
+      <li>{{ s }}</li>
+      {%- endfor %}
+    </ul>
+
+    {%- if page.links %}
+    <div class="actions">
+      {%- for l in page.links %}
+      <a class="btn{% if forloop.first %} btn--primary{% endif %}" href="{{ l.url }}">{{ l.label }} ↗</a>
+      {%- endfor %}
+    </div>
+    {%- for l in page.links %}{% if l.note %}
+    <p class="note">{{ l.label }} — {{ l.note }}</p>
+    {%- endif %}{% endfor %}
+    {%- endif %}
+  </header>
+
+  {%- if page.thumbnail %}
+  <figure class="shot">
+    <img src="{{ page.thumbnail | relative_url }}" alt="{{ page.title }} 첫 화면">
+  </figure>
+  {%- endif %}
+
+  <div class="prose">
+    {{ content }}
+  </div>
+</article>

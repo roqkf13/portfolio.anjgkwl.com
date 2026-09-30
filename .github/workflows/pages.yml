@@ -1,0 +1,58 @@
+name: Deploy Jekyll site to Pages
+
+# 배포는 GitHub Actions 로 한다 (클래식 GitHub Pages 빌드 아님).
+# 이유는 _notes/MEMORY.md 2026-08-24 "배포는 GitHub Actions 로 한다" 참조.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 배포는 겹치지 않게 한 번에 하나씩. 진행 중인 배포는 취소하지 않는다.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 체크아웃
+        uses: actions/checkout@v4
+
+      - name: Ruby 설치
+        uses: ruby/setup-ruby@v1
+        with:
+          # .ruby-version 은 3.3.12 지만 러너에 그 패치버전이 없을 수 있어 3.3 계열로 잡는다.
+          ruby-version: '3.3'
+          bundler-cache: true
+
+      - name: Pages 설정
+        id: pages
+        uses: actions/configure-pages@v5
+
+      - name: Jekyll 빌드
+        # base_path 는 커스텀 도메인이 붙기 전(/portfolio.anjgkwl.com)과
+        # 붙은 뒤("") 를 모두 알아서 처리한다. _config.yml 의 baseurl 은 "" 이다.
+        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+        env:
+          JEKYLL_ENV: production
+
+      - name: 산출물 업로드
+        uses: actions/upload-pages-artifact@v3
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Pages 에 배포
+        id: deployment
+        uses: actions/deploy-pages@v4

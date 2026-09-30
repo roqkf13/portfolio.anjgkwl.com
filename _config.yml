@@ -1,0 +1,40 @@
+# Site settings
+# 개인 포트폴리오(2026-09-29 — 슈퍼서브 개발 제안서에서 바꿨다). 홈 소개 문구는 _data/profile.yml,
+# 프로젝트는 _projects/ 에 파일 하나씩(README.md 「프로젝트 추가하는 법」).
+title: 포트폴리오
+description: >-
+  개발자 포트폴리오 — 참여한 프로젝트와 그 안에서 한 일
+baseurl: ""
+url: "https://portfolio.anjgkwl.com"
+
+# Build settings
+lang: ko-KR
+
+# 프로젝트 — _projects/<이름>.md 하나가 홈 카드 하나 + /projects/<이름>/ 페이지 하나가 된다
+collections:
+  projects:
+    output: true
+    permalink: /projects/:name/
+
+# 🔴 컬렉션 문서는 레이아웃을 안 적으면 **본문만** 나온다(머리·스타일이 통째로 빠진다) — 여기서 기본값을 준다
+defaults:
+  - scope:
+      path: ""
+      type: projects
+    values:
+      layout: project
+
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# front matter 없는 파일은 그대로 공개된다 — 사이트용이 아닌 문서는 여기에 넣는다
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+  - .bundle/
+  - README.md
+  - CLAUDE.md
