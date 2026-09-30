@@ -4,23 +4,43 @@ layout: default
 {%- assign p = site.data.profile -%}
 
 <section class="hero">
-  {%- if p.role != "" %}
-  <p class="eyebrow">{{ p.role }}</p>
-  {%- endif %}
-  <h1 class="hero__name">{{ p.name }}</h1>
-  <p class="hero__headline">{{ p.headline }}</p>
-  {%- if p.intro != "" %}
-  <p class="hero__intro">{{ p.intro }}</p>
-  {%- endif %}
-  {%- if p.github != "" or p.email != "" %}
-  <div class="actions">
-    {%- if p.github != "" %}
-    <a class="btn btn--primary" href="{{ p.github }}">GitHub ↗</a>
+  <div class="hero__text">
+    {%- if p.role != "" %}
+    <p class="eyebrow">{{ p.role }}</p>
     {%- endif %}
-    {%- if p.email != "" %}
-    <a class="btn" href="mailto:{{ p.email }}">이메일</a>
+    <h1 class="hero__headline">{{ p.headline }}</h1>
+    {%- if p.intro != "" %}
+    <p class="hero__intro">{{ p.intro }}</p>
+    {%- endif %}
+    {%- if p.github != "" or p.email != "" %}
+    <div class="actions">
+      {%- if p.github != "" %}
+      <a class="btn btn--primary" href="{{ p.github }}">GitHub ↗</a>
+      {%- endif %}
+      {%- if p.email != "" %}
+      <a class="btn" href="mailto:{{ p.email }}">이메일</a>
+      {%- endif %}
+    </div>
     {%- endif %}
   </div>
+  {%- if p.flow %}
+  <figure class="flow" aria-label="만들기, 배포, 운영, 되살리기를 차례로 돌고, 가운데에 결정과 실패를 기록으로 남기는 흐름">
+    <div class="flow__grid">
+      {%- for s in p.flow limit: 4 %}
+      <div class="flow__step flow__step--{{ forloop.index }}">
+        <span class="flow__num">0{{ forloop.index }}</span>
+        <strong class="flow__title">{{ s.title }}</strong>
+        <span class="flow__desc">{{ s.desc }}</span>
+        <span class="flow__tech">{{ s.tech }}</span>
+      </div>
+      {%- endfor %}
+      <span class="flow__arrow flow__arrow--r" aria-hidden="true">→</span>
+      <span class="flow__arrow flow__arrow--d" aria-hidden="true">↓</span>
+      <span class="flow__arrow flow__arrow--l" aria-hidden="true">←</span>
+      <span class="flow__arrow flow__arrow--u" aria-hidden="true">↑</span>
+      <div class="flow__hub"><strong>{{ p.flow_hub.title }}</strong><span>{{ p.flow_hub.desc }}</span></div>
+    </div>
+  </figure>
   {%- endif %}
 </section>
 
@@ -52,11 +72,46 @@ layout: default
     {%- for a in p.experience %}
     <article class="area">
       <h3 class="area__title">{{ a.area }}</h3>
-      <ul class="area__list">
-        {%- for it in a.items %}
-        <li><span class="tag">{{ it.at }}</span>{{ it.text }}</li>
+      <div class="area__visual">
+        {%- for row in a.flows %}
+        <div class="mflow">
+          {%- for box in row %}
+          {%- unless forloop.first %}<span class="mflow__arrow" aria-hidden="true">→</span>{%- endunless %}
+          <span class="mbox">{{ box }}</span>
+          {%- endfor %}
+        </div>
         {%- endfor %}
-      </ul>
+        {%- if a.tiles %}
+        <div class="mtiles">
+          {%- for t in a.tiles %}<span class="mbox">{{ t }}</span>{%- endfor %}
+        </div>
+        {%- endif %}
+        {%- for b in a.bars %}
+        {%- assign pct = b.value | times: 100.0 | divided_by: b.total | round: 1 %}
+        <div class="mbar">
+          <span class="mbar__label">{{ b.label }}</span>
+          <span class="mbar__track" aria-hidden="true"><span class="mbar__fill" style="width: {{ pct }}%"></span></span>
+          <span class="mbar__value">{{ b.value }} / {{ b.total }}</span>
+        </div>
+        {%- endfor %}
+        {%- if a.facts %}
+        <div class="mfacts">
+          {%- for f in a.facts %}<span class="mfact">{{ f }}</span>{%- endfor %}
+        </div>
+        {%- endif %}
+      </div>
+      <div class="area__foot">
+        <p class="area__summary">{{ a.summary }}</p>
+        <p class="area__at">{%- for t in a.at %}<span class="tag">{{ t }}</span>{%- endfor %}</p>
+      </div>
+      <details class="area__more">
+        <summary>자세히</summary>
+        <ul class="area__list">
+          {%- for it in a.items %}
+          <li><span class="tag">{{ it.at }}</span>{{ it.text }}</li>
+          {%- endfor %}
+        </ul>
+      </details>
     </article>
     {%- endfor %}
   </div>
