@@ -11,7 +11,7 @@ stack: ["Python", "FastAPI", "PostgreSQL", "Next.js", "Flutter", "pgvector", "Vi
 links:
   - label: "데모"
     url: "https://supersub.anjgkwl.com"
-    note: "개인 PC 에서 돌고 있어 PC 가 꺼져 있으면 열리지 않습니다."
+    note: "화면 · 서버 · 영상 분석이 모두 개인 PC 에서 돌아서, PC 가 꺼져 있으면 데모만 열리지 않습니다. 이 페이지와 팀 저장소는 늘 열립니다."
   - label: "팀 저장소"
     url: "https://github.com/pmhllll12/super-sub.cloud"
 
