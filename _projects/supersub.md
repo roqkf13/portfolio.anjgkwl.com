@@ -12,6 +12,9 @@ links:
   - label: "데모"
     url: "https://supersub.anjgkwl.com"
     note: "화면 · 서버 · 영상 분석이 모두 개인 PC 에서 돌아서, PC 가 꺼져 있으면 데모만 열리지 않습니다. 이 페이지와 팀 저장소는 늘 열립니다."
+  - label: "팀 서비스"
+    url: "https://supersub-ai.com/"
+    note: "팀이 AWS 에서 운영하는 서비스입니다."
   - label: "팀 저장소"
     url: "https://github.com/pmhllll12/super-sub.cloud"
 
