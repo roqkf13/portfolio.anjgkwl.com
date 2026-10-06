@@ -44,6 +44,31 @@ layout: default
   {%- endif %}
 </section>
 
+<section class="section" id="projects" aria-labelledby="projects-title">
+  <h2 class="section__title" id="projects-title">프로젝트</h2>
+  <div class="cards">
+    {%- assign projects = site.projects | sort: "order" %}
+    {%- for pr in projects %}
+    <a class="card" href="{{ pr.url | relative_url }}">
+      {%- if pr.thumbnail %}
+      <img class="card__img" src="{{ pr.thumbnail | relative_url }}" alt="" loading="lazy">
+      {%- endif %}
+      <div class="card__body">
+        <p class="eyebrow">{{ pr.team }} · {{ pr.role }}</p>
+        <h3 class="card__title">{{ pr.title }}</h3>
+        <p class="card__summary">{{ pr.summary }}</p>
+        <ul class="chips chips--sm">
+          {%- for s in pr.stack limit: 5 %}
+          <li>{{ s }}</li>
+          {%- endfor %}
+        </ul>
+        <p class="card__period">{{ pr.period }}</p>
+      </div>
+    </a>
+    {%- endfor %}
+  </div>
+</section>
+
 <section class="section" aria-labelledby="skills-title">
   <h2 class="section__title" id="skills-title">기술</h2>
   <dl class="skills">
@@ -114,28 +139,3 @@ layout: default
   </div>
 </section>
 {%- endif %}
-
-<section class="section" id="projects" aria-labelledby="projects-title">
-  <h2 class="section__title" id="projects-title">프로젝트</h2>
-  <div class="cards">
-    {%- assign projects = site.projects | sort: "order" %}
-    {%- for pr in projects %}
-    <a class="card" href="{{ pr.url | relative_url }}">
-      {%- if pr.thumbnail %}
-      <img class="card__img" src="{{ pr.thumbnail | relative_url }}" alt="" loading="lazy">
-      {%- endif %}
-      <div class="card__body">
-        <p class="eyebrow">{{ pr.team }} · {{ pr.role }}</p>
-        <h3 class="card__title">{{ pr.title }}</h3>
-        <p class="card__summary">{{ pr.summary }}</p>
-        <ul class="chips chips--sm">
-          {%- for s in pr.stack limit: 5 %}
-          <li>{{ s }}</li>
-          {%- endfor %}
-        </ul>
-        <p class="card__period">{{ pr.period }}</p>
-      </div>
-    </a>
-    {%- endfor %}
-  </div>
-</section>

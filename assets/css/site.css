@@ -588,6 +588,38 @@ a:focus-visible,
   font-size: 13px;
 }
 
+/* 프로젝트가 하나뿐일 때는 한 줄을 다 쓴다(사용자, 2026-10-06) — 둘 이상이면 위의 격자 그대로다 */
+.cards > .card:only-child {
+  grid-column: 1 / -1;
+}
+
+/* 넓은 화면에서는 가로로 — 왼쪽 캡처 · 오른쪽 글. 1000px 아래에서는 글 칸이 캡처보다 높아져 캡처의 양옆이 잘리므로 세로 카드로 둔다 */
+@media (min-width: 1000px) {
+  .cards > .card:only-child {
+    flex-direction: row;
+  }
+
+  .cards > .card:only-child .card__img {
+    width: 54%;
+    border-right: 1px solid var(--border);
+    border-bottom: 0;
+  }
+
+  .cards > .card:only-child .card__body {
+    justify-content: center;
+    padding: 28px 36px;
+  }
+
+  .cards > .card:only-child .card__title {
+    font-size: 26px;
+  }
+
+  .cards > .card:only-child .card__summary {
+    flex: none;
+    font-size: 16px;
+  }
+}
+
 /* ── 프로젝트 상세 ───────────────────────────────────────── */
 
 .project {
