@@ -533,7 +533,8 @@ a:focus-visible,
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  /* auto-fit — 카드가 적으면 남는 칸을 접어 한 줄을 나눠 쓴다(둘이면 반반 — 사용자, 2026-10-07 「좌우로 나란히」) */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
 }
 
