@@ -11,7 +11,7 @@ stack: ["Python", "FastAPI", "PostgreSQL", "Next.js", "Flutter", "pgvector", "Vi
 links:
   - label: "데모"
     url: "https://supersub.anjgkwl.com"
-    note: "화면 · 서버 · 영상 분석이 모두 개인 PC 에서 돌아서, PC 가 꺼져 있으면 데모만 열리지 않습니다. 이 페이지와 팀 저장소는 늘 열립니다."
+    note: "예시 데이터로 화면만 둘러보는 판입니다. 실제 데이터와 영상 분석이 도는 판은 개인 PC 에 있습니다."
   - label: "팀 서비스"
     url: "https://supersub-ai.com/"
     note: "팀이 AWS 에서 운영하는 서비스입니다."
@@ -19,7 +19,7 @@ links:
     url: "https://github.com/pmhllll12/super-sub.cloud"
   - label: "개인 사본 구성"
     url: "https://github.com/roqkf13/supersub-selfhost"
-    note: "데모를 개인 PC 에서 돌리는 인프라 코드입니다. 보여 주기용으로 추린 저장소라 팀 코드는 들어 있지 않습니다."
+    note: "팀 서비스 전체를 개인 PC 에서 돌리는 인프라 코드입니다. 보여 주기용으로 추린 저장소라 팀 코드는 들어 있지 않습니다."
 
 # 페이지 본문 — 그림 7 : 글 3(사용자, 2026-09-30). 절마다 text(왼쪽 글)와 blocks(오른쪽 그림 — _includes/vblocks.html)
 # 🔴 그림의 말 · 숫자는 팀 문서 · 저장소로 확인된 것만. 팀 main 에 들어간 것만 「내가 한 일」에 적는다(09-29)
@@ -119,7 +119,7 @@ sections:
               - { type: facts, items: ["시험을 도는 CI 를 처음 걸었다", "문서 사이트 그림 · ERD 생성기를 저장소로"] }
 
   - title: "끝난 뒤에도 돌게 — 개인 사본"
-    text: "팀 서비스는 AWS 에서 돌았습니다. 프로젝트가 끝나도 링크 하나로 보여 줄 수 있도록, 팀 코드는 한 줄도 고치지 않고 전체를 내 PC 로 옮긴 사본을 따로 운영합니다 — 위 「데모」가 그것입니다."
+    text: "팀 서비스는 AWS 에서 돌았습니다. 프로젝트가 끝나도 보여 줄 수 있도록, 팀 코드는 한 줄도 고치지 않고 전체를 내 PC 로 옮긴 사본을 따로 운영합니다. 위 「데모」는 그 사본의 화면을 예시 데이터로 늘 열어 둔 것입니다."
     blocks:
       - type: compare
         from_title: "팀(AWS)"
