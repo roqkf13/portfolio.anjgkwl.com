@@ -899,9 +899,27 @@ a:focus-visible,
 }
 
 .vcard__title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 8px;
   margin: 0;
   font-size: 16px;
   letter-spacing: -0.01em;
+}
+
+/* 카드가 한 사람의 영역일 때 — 머리에 이름(title) 옆 역할(role), 내 카드(me)는 테두리로 구분한다 */
+.vcard__role {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0;
+  word-break: keep-all;
+}
+
+.vcard--me {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), var(--shadow);
 }
 
 .vstats {
@@ -951,39 +969,6 @@ a:focus-visible,
 
 .vcard .vstat__num {
   font-size: 18px;
-}
-
-/* 사람 줄은 내용만큼만 차지한다 — 폭을 채우면 아래 카드 줄과 칸이 맞아, 위 사람이 그 칸의 담당으로 읽힌다 */
-.vpeople {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.vperson {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 2px 8px;
-  padding: 8px 14px;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  background: var(--surface);
-}
-
-.vperson strong {
-  font-size: 16px;
-}
-
-.vperson span {
-  color: var(--muted);
-  font-size: 13px;
-  word-break: keep-all;
-}
-
-.vperson--me {
-  border-color: var(--accent);
-  background: var(--accent-soft);
 }
 
 .vcompare {

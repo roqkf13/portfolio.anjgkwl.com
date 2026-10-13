@@ -1,10 +1,10 @@
 {%- comment -%}
   그림 블록 — 프로젝트 페이지의 절마다 제목 아래 그림 칸을 그린다.
-  홈 「해 본 일」과 같은 부품(mflow · mtiles · mfact · mbar)에 숫자 카드 · 사람 · 카드 묶음 · 대응표 · 메모 · 그림을 더했다.
-  include.blocks: [{ type: flow | tiles | facts | bar | stats | people | cards | compare | note | image | images | split, ... }]
+  홈 「해 본 일」과 같은 부품(mflow · mtiles · mfact · mbar)에 숫자 카드 · 카드 묶음 · 대응표 · 메모 · 그림을 더했다.
+  include.blocks: [{ type: flow | tiles | facts | bar | stats | cards | compare | note | image | images | split, ... }]
   images 는 그림 여러 장을 둘씩 나란히 놓는다(items: [{ src, alt, caption }] · cols: "1.79fr 1.24fr" 처럼 두 그림의 가로세로 비를 주면 높이가 맞는다).
   split 은 왼쪽(left) · 오른쪽(right) 두 칸에 blocks 를 다시 놓는다(cards 처럼 이 파일을 한 번 더 부른다).
-  cards 는 카드마다 blocks 를 다시 가진다(이 파일을 한 번 더 부른다).
+  cards 는 카드마다 blocks 를 다시 가진다(이 파일을 한 번 더 부른다). 카드가 한 사람의 영역이면 title 에 이름, role 에 역할을 주고 내 카드에는 me: true(테두리로 구분).
 {%- endcomment -%}
 {%- for b in include.blocks %}
 {%- case b.type %}
@@ -35,17 +35,11 @@
   <div class="vstat"><span class="vstat__num">{{ s.num }}</span><span class="vstat__label">{{ s.label }}</span></div>
   {%- endfor %}
 </div>
-{%- when "people" %}
-<div class="vpeople">
-  {%- for m in b.items %}
-  <div class="vperson{% if m.me %} vperson--me{% endif %}"><strong>{{ m.name }}</strong><span>{{ m.role }}</span></div>
-  {%- endfor %}
-</div>
 {%- when "cards" %}
 <div class="vcards">
   {%- for c in b.items %}
-  <div class="vcard">
-    <h3 class="vcard__title">{{ c.title }}</h3>
+  <div class="vcard{% if c.me %} vcard--me{% endif %}">
+    <h3 class="vcard__title">{{ c.title }}{% if c.role %}<span class="vcard__role">{{ c.role }}</span>{% endif %}</h3>
     {%- include vblocks.html blocks=c.blocks %}
   </div>
   {%- endfor %}

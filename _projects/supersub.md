@@ -52,18 +52,39 @@ sections:
           - { src: "/assets/img/supersub/analysis-moments.webp", alt: "백스윙, 접촉, 접촉 후 세 순간의 자세를 분홍과 초록 뼈대로 겹쳐 그린 화면", caption: "임팩트 순간 맞추기 — 백스윙 · 접촉 · 접촉 후의 자세를 겹쳐 차이를 본다" }
           - { src: "/assets/img/supersub/analysis-report.webp", alt: "등급과 점수, 근거 문장, 여섯 항목의 점수 도형이 있는 분석 리포트", caption: "분석 리포트 — 등급, 근거 문장, 여섯 항목의 점수. 내 프로필에서 다시 볼 수 있다" }
 
+  # 🔴 카드 하나 = 한 사람의 영역이다(사용자, 2026-10-13 — 영역별 카드였을 때는 내가 한 일이 남의 카드에 흩어져 보였다).
+  #    누구 카드에 무엇을 두는지는 팀 문서의 역할 표(제안서 7장 3절)와 팀 main 의 커밋으로 확인한 것만 — 옮기거나 더할 때도 그렇게 한다.
+  #    한 사람 것이 아닌 것(어디서 도는지 · 영역별 시험 수 · 문서 사이트)은 아래 「넷이 함께」에 둔다
   - title: "서비스 구성"
-    text: "4명이 영역을 나눠 맡았습니다. 수치는 팀 문서의 2026-09-23 기준입니다."
+    text: "4명이 영역을 나눠 맡았습니다. 수치는 그 영역 전체의 것이고, 팀 문서의 2026-09-23 기준입니다."
     blocks:
-      - type: people
-        items:
-          - { name: "박민호", role: "PM · QA" }
-          - { name: "백성검", role: "웹 · 앱" }
-          - { name: "나", role: "백엔드 · 파이프라인 · 배포", me: true }
-          - { name: "정상호", role: "AI 분석" }
       - type: cards
         items:
-          - title: "영상 분석 AI"
+          - title: "박민호"
+            role: "PM · QA"
+            blocks:
+              - { type: tiles, items: ["요구사항 · 일정 관리", "QA 총괄", "main 통합"] }
+              - { type: flow, items: ["이미지가 올라옴", "2분 안에 서버가 스스로 갱신", "파드가 뜰 때 마이그레이션"] }
+              - { type: facts, items: ["백엔드 배포를 k3s 로 전환", "GitHub Actions — 이미지 빌드"] }
+          - title: "백성검"
+            role: "웹 · 앱"
+            blocks:
+              - { type: tiles, items: ["분석 리포트 화면", "선수 카드 · 공개 링크", "포메이션 판", "AI 추천", "팀 매칭 화면"] }
+              - { type: facts, items: ["Next.js 16 · React 19", "서버 쪽 중계(BFF) · httpOnly 쿠키", "Flutter · Riverpod — 계약 시험 · 실서버 연결(스토어 배포 전)"] }
+          - title: "나"
+            role: "백엔드 · 파이프라인 · 배포"
+            me: true
+            blocks:
+              - type: stats
+                items:
+                  - { num: "7", label: "컨텍스트(헥사고날)" }
+                  - { num: "100", label: "API 엔드포인트" }
+                  - { num: "48", label: "DB 마이그레이션" }
+              - { type: tiles, items: ["사용자", "카드", "분석", "매칭", "평가", "과금", "알림"] }
+              - { type: flow, items: ["영상 업로드 — S3", "분석 작업 큐", "결과 적재", "리포트 API"] }
+              - { type: facts, items: ["EC2 서버 · S3 권한 · DB 백업", "시험 CI — 백엔드(실제 DB) · 앱"] }
+          - title: "정상호"
+            role: "AI 분석"
             blocks:
               - { type: flow, items: ["사람 검출(RT-DETR)", "자세 추정(ViTPose)", "동작 특징", "규칙(루브릭) 채점"] }
               - type: stats
@@ -72,22 +93,10 @@ sections:
                   - { num: "약 1분 6초", label: "한 편 분석, S3 입출력까지(T4 · vLLM)" }
               - { type: facts, items: ["등급은 코드가 결정론적으로", "EXAONE 4.0 1.2B 는 근거 문장만", "GPU 워커가 큐에서 가져간다"] }
               - { type: note, text: "한계 — 채점 기준은 축구 인스텝 슈팅 하나, 임계값은 지도자 검수 전 잠정치" }
-          - title: "웹 · 앱"
+      - type: cards
+        items:
+          - title: "넷이 함께"
             blocks:
-              - { type: tiles, items: ["분석 리포트 — 등급 · 레이더 차트", "선수 카드 · 공개 링크", "포메이션 판", "AI 추천"] }
-              - { type: flow, items: ["팀 매칭 — 조건", "후보", "신청", "수락"] }
-              - { type: facts, items: ["Next.js 16 · React 19", "서버 쪽 중계(BFF) · httpOnly 쿠키", "Flutter · Riverpod — 계약 시험 · 실서버 연결(스토어 배포 전)"] }
-          - title: "백엔드 · 데이터"
-            blocks:
-              - type: stats
-                items:
-                  - { num: "7", label: "컨텍스트(헥사고날)" }
-                  - { num: "100", label: "API 엔드포인트" }
-                  - { num: "48", label: "DB 마이그레이션" }
-              - { type: tiles, items: ["사용자", "카드", "분석", "매칭", "평가", "과금", "알림"] }
-          - title: "운영 · 협업"
-            blocks:
-              - { type: flow, items: ["이미지가 올라옴", "2분 안에 서버가 스스로 갱신", "파드가 뜰 때 마이그레이션"] }
               - { type: facts, items: ["API — EC2 의 k3s", "영상 — S3", "분석 — 필요할 때만 켜는 GPU 서버", "웹 — Vercel · 앞단 — Cloudflare"] }
               - type: stats
                 items:
@@ -95,7 +104,7 @@ sections:
                   - { num: "446", label: "AI 시험" }
                   - { num: "1,085", label: "웹 시험" }
                   - { num: "419", label: "앱 시험" }
-              - { type: facts, items: ["GitHub Actions — 백엔드(실제 DB) · 앱 시험 · 이미지 빌드", "제안서 9장 · 부록 · 개발 로그를 문서 사이트로"] }
+              - { type: facts, items: ["제안서 9장 · 부록 · 개발 로그를 문서 사이트로"] }
 
   - title: "내가 맡은 일 — 백엔드"
     text: "팀에서 백엔드를 맡았습니다. 커밋 439건 중 175건이 백엔드 코드(fastapi/)이고, 나머지는 대부분 API 계약 · 요구사항 같은 설계 · 진행 문서입니다(2026-09-29 기준)."

@@ -45,8 +45,9 @@ links:                                     # 첫 번째가 강조 단추가 된�
 
 **그림 중심으로 만들려면** 본문 대신 front matter 에 `sections` 를 둔다 — 있으면 페이지가 넓어지고, 절마다
 제목과 글(`text`)이 위에, 그 아래 그림 칸(`blocks`)이 폭을 다 쓴다. 그림 부품은 `_includes/vblocks.html` 에 있다
-(`flow` 화살표 상자 · `tiles` 상자 · `facts` 칩 · `bar` 막대 · `stats` 숫자 카드 · `people` 사람 · `cards` 카드 묶음 · `compare` 대응표 · `note` · `image` ·
+(`flow` 화살표 상자 · `tiles` 상자 · `facts` 칩 · `bar` 막대 · `stats` 숫자 카드 · `cards` 카드 묶음 · `compare` 대응표 · `note` · `image` ·
 `images` 그림 둘씩 나란히 · `split` 왼쪽 · 오른쪽 두 칸).
+팀원을 적을 때는 `cards` 의 카드 하나를 한 사람으로 둔다 — `title` 에 이름, `role` 에 역할, 내 카드에 `me: true`.
 예시는 `_projects/supersub.md`.
 
 ```yaml
