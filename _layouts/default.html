@@ -8,7 +8,13 @@
   {%- feed_meta -%}
   <link rel="stylesheet" href="{{ '/assets/css/site.css' | relative_url }}">
 </head>
-<body>
+{%- comment -%}
+  왼쪽 목차 — 절이 있는 페이지에서 그 절로 가는 링크를 왼쪽에 둔다(사용자, 2026-10-13). 좁은 화면에서는 본문 위의 한 줄이 된다.
+  홈은 머리말(front matter)의 toc: [{ id, title }] 를, 프로젝트 페이지는 sections 의 제목을 쓴다(「 — 」 앞부분만, 주소는 #psec-N).
+{%- endcomment -%}
+{%- assign toc_on = false -%}
+{%- if page.toc or page.sections %}{% assign toc_on = true %}{% endif %}
+<body{% if toc_on %} class="has-toc"{% endif %}>
   <header class="site-header">
     <div class="wrap site-header__inner">
       <a class="site-brand" href="{{ '/' | relative_url }}">{{ site.title }}</a>
@@ -22,7 +28,22 @@
   </header>
 
   <main class="wrap">
-    {{ content }}
+    {%- if toc_on %}
+    <nav class="toc" aria-label="이 페이지의 목차">
+      <p class="toc__label">목차</p>
+      <ul>
+        {%- for t in page.toc %}
+        <li><a href="#{{ t.id }}">{{ t.title }}</a></li>
+        {%- endfor %}
+        {%- for s in page.sections %}
+        <li><a href="#psec-{{ forloop.index }}">{{ s.title | split: " — " | first }}</a></li>
+        {%- endfor %}
+      </ul>
+    </nav>
+    {%- endif %}
+    <div class="page">
+      {{ content }}
+    </div>
   </main>
 
   <footer class="site-footer">

@@ -13,6 +13,7 @@
   --shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 8px 24px rgba(16, 24, 40, 0.06);
   --radius: 16px;
   --wrap: 1200px; /* 넓은 화면을 넓게 쓴다(사용자, 2026-09-30) — 글 문단은 따로 폭을 묶는다 */
+  --rail: 220px; /* 왼쪽 목차가 차지하는 폭(목차 180 + 사이 40) — 목차가 있는 페이지는 이만큼 더 넓다 */
   --font: "Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic",
     "Noto Sans KR", system-ui, sans-serif;
 }
@@ -124,6 +125,98 @@ a:focus-visible,
   border-top: 1px solid var(--border);
   color: var(--muted);
   font-size: 14px;
+}
+
+/* ── 왼쪽 목차 ───────────────────────────────────────────── */
+
+/* 절이 있는 페이지에서 그 절로 가는 링크(사용자, 2026-10-13). 넓은 화면에서는 왼쪽에 붙어 따라 내려오고,
+   좁은 화면에서는 본문 위에 한 줄로 놓인다(넘치면 옆으로 민다). 스크립트는 쓰지 않는다 */
+.toc {
+  padding-top: 16px;
+}
+
+.toc__label {
+  display: none;
+}
+
+.toc ul {
+  display: flex;
+  gap: 8px;
+  margin: 0;
+  padding: 0 0 4px;
+  overflow-x: auto;
+  list-style: none;
+}
+
+.toc a {
+  display: block;
+  padding: 5px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.toc a:hover {
+  border-color: var(--accent);
+  color: var(--fg);
+}
+
+/* 목차로 옮겨 갔을 때 절의 머리가 위에 붙은 머리줄(60px)에 가리지 않게 */
+:target {
+  scroll-margin-top: 84px;
+}
+
+@media (min-width: 1280px) {
+  .has-toc .wrap {
+    max-width: calc(var(--wrap) + var(--rail));
+  }
+
+  .has-toc main {
+    display: grid;
+    grid-template-columns: calc(var(--rail) - 40px) minmax(0, 1fr);
+    column-gap: 40px;
+    align-items: start;
+  }
+
+  .toc {
+    position: sticky;
+    top: 84px;
+    padding-top: 0;
+    margin-top: 72px;
+  }
+
+  .toc__label {
+    display: block;
+    margin: 0 0 8px 12px;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .toc ul {
+    display: grid;
+    gap: 2px;
+    padding: 0;
+    overflow: visible;
+    border-left: 1px solid var(--border);
+  }
+
+  .toc a {
+    padding: 6px 12px;
+    border: 0;
+    border-radius: 0 8px 8px 0;
+    background: none;
+    white-space: normal;
+  }
+
+  .toc a:hover {
+    background: var(--chip-bg);
+  }
 }
 
 /* ── 공통 조각 ───────────────────────────────────────────── */

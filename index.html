@@ -1,5 +1,11 @@
 ---
 layout: default
+# 왼쪽 목차 — 아래 절의 id 와 맞춘다(절을 더하거나 빼면 여기도 고친다)
+toc:
+  - { id: "projects", title: "프로젝트" }
+  - { id: "contests", title: "대회 참가" }
+  - { id: "skills", title: "기술" }
+  - { id: "experience", title: "해 본 일" }
 ---
 {%- assign p = site.data.profile -%}
 
@@ -113,7 +119,7 @@ layout: default
 </section>
 {%- endif %}
 
-<section class="section" aria-labelledby="skills-title">
+<section class="section" id="skills" aria-labelledby="skills-title">
   <h2 class="section__title" id="skills-title">기술</h2>
   <dl class="skills">
     {%- for g in p.skills %}
