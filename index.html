@@ -69,6 +69,50 @@ layout: default
   </div>
 </section>
 
+{%- if p.contests %}
+<section class="section" id="contests" aria-labelledby="contests-title">
+  <h2 class="section__title" id="contests-title">대회 참가</h2>
+  <div class="areas">
+    {%- for c in p.contests %}
+    <article class="area">
+      <div>
+        <p class="eyebrow">{{ c.host }} · {{ c.period }}</p>
+        <h3 class="area__title">{{ c.title }}</h3>
+      </div>
+      <div class="area__visual">
+        <div class="mflow">
+          <span class="tag">대회 일정</span>
+          {%- for box in c.schedule %}
+          {%- unless forloop.first %}<span class="mflow__arrow" aria-hidden="true">→</span>{%- endunless %}
+          <span class="mbox">{{ box }}</span>
+          {%- endfor %}
+        </div>
+        {%- if c.facts %}
+        <div class="mfacts">
+          {%- for f in c.facts %}<span class="mfact">{{ f }}</span>{%- endfor %}
+        </div>
+        {%- endif %}
+      </div>
+      <ul class="area__list">
+        {%- for it in c.items %}
+        <li><span class="tag">{{ it.at }}</span>{{ it.text }}</li>
+        {%- endfor %}
+      </ul>
+      <div class="actions">
+        {%- for l in c.links %}
+        {%- if l.url contains "://" %}
+        <a class="btn{% if forloop.first %} btn--primary{% endif %}" href="{{ l.url }}">{{ l.label }} ↗</a>
+        {%- else %}
+        <a class="btn{% if forloop.first %} btn--primary{% endif %}" href="{{ l.url | relative_url }}">{{ l.label }} →</a>
+        {%- endif %}
+        {%- endfor %}
+      </div>
+    </article>
+    {%- endfor %}
+  </div>
+</section>
+{%- endif %}
+
 <section class="section" aria-labelledby="skills-title">
   <h2 class="section__title" id="skills-title">기술</h2>
   <dl class="skills">
