@@ -1,7 +1,9 @@
 {%- comment -%}
-  그림 블록 — 프로젝트 페이지의 「그림 7 : 글 3」 칸을 그린다.
+  그림 블록 — 프로젝트 페이지의 절마다 제목 아래 그림 칸을 그린다.
   홈 「해 본 일」과 같은 부품(mflow · mtiles · mfact · mbar)에 숫자 카드 · 사람 · 카드 묶음 · 대응표 · 메모 · 그림을 더했다.
-  include.blocks: [{ type: flow | tiles | facts | bar | stats | people | cards | compare | note | image, ... }]
+  include.blocks: [{ type: flow | tiles | facts | bar | stats | people | cards | compare | note | image | images | split, ... }]
+  images 는 그림 여러 장을 둘씩 나란히 놓는다(items: [{ src, alt, caption }] · cols: "1.79fr 1.24fr" 처럼 두 그림의 가로세로 비를 주면 높이가 맞는다).
+  split 은 왼쪽(left) · 오른쪽(right) 두 칸에 blocks 를 다시 놓는다(cards 처럼 이 파일을 한 번 더 부른다).
   cards 는 카드마다 blocks 를 다시 가진다(이 파일을 한 번 더 부른다).
 {%- endcomment -%}
 {%- for b in include.blocks %}
@@ -63,5 +65,23 @@
   <img src="{{ b.src | relative_url }}" alt="{{ b.alt }}" loading="lazy">
   {%- if b.caption %}<figcaption>{{ b.caption }}</figcaption>{%- endif %}
 </figure>
+{%- when "images" %}
+<div class="vshots"{% if b.cols %} style="--cols: {{ b.cols }}"{% endif %}>
+  {%- for im in b.items %}
+  <figure class="shot vshot">
+    <img src="{{ im.src | relative_url }}" alt="{{ im.alt }}" loading="lazy">
+    {%- if im.caption %}<figcaption>{{ im.caption }}</figcaption>{%- endif %}
+  </figure>
+  {%- endfor %}
+</div>
+{%- when "split" %}
+<div class="vsplit">
+  <div class="vsplit__col">
+    {%- include vblocks.html blocks=b.left %}
+  </div>
+  <div class="vsplit__col">
+    {%- include vblocks.html blocks=b.right %}
+  </div>
+</div>
 {%- endcase %}
 {%- endfor %}

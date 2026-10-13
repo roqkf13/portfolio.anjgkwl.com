@@ -714,7 +714,8 @@ a:focus-visible,
   font-size: 0.9em;
 }
 
-/* 넓은 프로젝트 페이지(sections 가 있을 때) — 그림 7 : 글 3. 머리는 글 | 첫 화면, 절마다 글 | 그림 */
+/* 넓은 프로젝트 페이지(sections 가 있을 때) — 머리는 글 | 첫 화면(3 : 7), 절은 제목이 위 · 그림 칸이 폭을 다 쓴다.
+   절도 글 3 : 그림 7 이었는데 페이지가 세로로 너무 길어 바꿨다(사용자, 2026-10-13) */
 .project--wide {
   max-width: none;
 }
@@ -732,21 +733,13 @@ a:focus-visible,
 
 .psec {
   display: grid;
-  grid-template-columns: 3fr 7fr;
-  gap: 40px;
+  gap: 20px;
   padding: 48px 0;
   border-top: 1px solid var(--border);
 }
 
 .psec:first-of-type {
   margin-top: 56px;
-}
-
-/* 오른쪽 그림이 길어도 제목이 따라온다 */
-.psec__text {
-  position: sticky;
-  top: 24px;
-  align-self: start;
 }
 
 .psec__text h2 {
@@ -757,6 +750,7 @@ a:focus-visible,
 }
 
 .psec__text p {
+  max-width: 760px;
   margin: 0;
   color: var(--muted);
   word-break: keep-all;
@@ -775,17 +769,24 @@ a:focus-visible,
 .psec__visual > .mflow .mbox,
 .psec__visual > .mtiles .mbox,
 .psec__visual > .vcompare .mbox,
-.psec__visual > .vstats .vstat {
+.psec__visual > .vstats .vstat,
+.vsplit__col > .mflow .mbox,
+.vsplit__col > .mtiles .mbox,
+.vsplit__col > .vcompare .mbox,
+.vsplit__col > .vstats .vstat {
   background: var(--surface);
 }
 
+/* 카드는 한 줄을 채운다 — 넓은 화면에서 한 줄에 넷, 줄에 남은 카드는 그 줄을 나눠 쓴다(빈 칸을 두지 않는다) */
 .vcards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 12px;
 }
 
 .vcard {
+  flex: 1 1 250px;
+  min-width: 0;
   display: grid;
   align-content: start;
   gap: 12px;
@@ -835,9 +836,25 @@ a:focus-visible,
   word-break: keep-all;
 }
 
+/* 카드 안의 숫자 카드는 작게, 내용만큼만 차지하게 — 한 줄에 넷인 좁은 카드에서도 둘씩 놓여 카드가 길어지지 않는다.
+   칸 폭을 고정하지 않는 까닭: 「약 1분 6초」처럼 긴 숫자가 두 줄로 끊긴다 */
+.vcard .vstats {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.vcard .vstat {
+  flex: 1 1 90px;
+  padding: 10px 12px;
+}
+
+.vcard .vstat__num {
+  font-size: 18px;
+}
+
 .vpeople {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 10px;
 }
 
@@ -893,9 +910,32 @@ a:focus-visible,
   margin: 0;
 }
 
+/* 그림 여러 장을 둘씩 나란히 — 좁은 화면에서는 한 줄에 하나.
+   --cols 로 두 칸의 폭 비를 줄 수 있다(두 그림의 가로세로 비를 적으면 높이가 맞는다) */
+.vshots {
+  display: grid;
+  grid-template-columns: var(--cols, repeat(2, minmax(0, 1fr)));
+  align-items: start;
+  gap: 16px;
+}
+
+/* 왼쪽 · 오른쪽 두 칸 — 좁은 화면에서는 위아래 */
+.vsplit {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 24px;
+}
+
+.vsplit__col {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+}
+
 @media (max-width: 860px) {
   .project--wide .ptop,
-  .psec {
+  .vsplit {
     grid-template-columns: 1fr;
     gap: 20px;
   }
@@ -903,9 +943,11 @@ a:focus-visible,
   .project--wide .ptop__shot {
     order: -1;
   }
+}
 
-  .psec__text {
-    position: static;
+@media (max-width: 700px) {
+  .vshots {
+    grid-template-columns: 1fr;
   }
 }
 

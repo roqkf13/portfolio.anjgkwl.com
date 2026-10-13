@@ -14,7 +14,7 @@ links:
   - label: "팀 저장소"
     url: "https://github.com/pmhllll12/cloud.harrypoter"
 
-# 페이지 본문 — 그림 7 : 글 3. 절마다 text(왼쪽 글)와 blocks(오른쪽 그림 — _includes/vblocks.html)
+# 페이지 본문 — 절마다 text(제목 아래 글)와 blocks(그 아래 그림 칸 — _includes/vblocks.html)
 # 🔴 「내가 한 일」은 팀 저장소의 내 커밋(2026-06-22 ~ 06-25)으로 확인되는 것만 적는다(2026-10-07 대조)
 sections:
   - title: "어떤 서비스인가"

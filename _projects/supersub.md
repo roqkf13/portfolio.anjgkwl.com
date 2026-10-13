@@ -24,7 +24,8 @@ links:
     url: "https://event.wanted.co.kr/ai-championship/2026/projects/430"
     note: "원티드 AI Championship 2026 에 팀으로 참가해 올린 페이지입니다."
 
-# 페이지 본문 — 그림 7 : 글 3(사용자, 2026-09-30). 절마다 text(왼쪽 글)와 blocks(오른쪽 그림 — _includes/vblocks.html)
+# 페이지 본문 — 절마다 text(제목 아래 글)와 blocks(그 아래 그림 칸 — _includes/vblocks.html).
+#   절은 제목이 위 · 그림 칸이 폭을 다 쓴다(사용자, 2026-10-13 — 09-30 의 「그림 7 : 글 3」은 페이지가 세로로 너무 길어 바꿨다)
 # 🔴 그림의 말 · 숫자는 팀 문서 · 저장소로 확인된 것만. 팀 main 에 들어간 것만 「내가 한 일」에 적는다(09-29)
 sections:
   - title: "어떤 서비스인가"
@@ -40,10 +41,16 @@ sections:
   - title: "분석 결과 화면"
     text: "영상을 올리고 분석할 선수를 고르면 관절을 따라가며 자세를 재고, 기준 선수와 나란히 놓아 차이를 보여 줍니다. 팀 시연 영상의 장면이고, 화면 속 영상은 시연용입니다."
     blocks:
-      - { type: image, src: "/assets/img/supersub/analysis-tracking.webp", alt: "공을 차는 선수의 다리에 관절 선이 그려지고, 오른쪽에 분석 진행 단계가 보이는 화면", caption: "관절 추적 — 고른 선수의 관절을 따라가며 자세를 잰다. 오른쪽은 분석이 진행되는 단계" }
-      - { type: image, src: "/assets/img/supersub/analysis-compare.webp", alt: "기준 선수 영상과 올린 영상이 나란히 놓이고, 오른쪽에 등급과 근거 문장, 항목별 점수 도형이 보이는 화면", caption: "기준 선수와 비교 — 분홍이 기준 선수, 초록이 올린 영상. 오른쪽에 등급 · 근거 문장 · 항목별 점수" }
-      - { type: image, src: "/assets/img/supersub/analysis-moments.webp", alt: "백스윙, 접촉, 접촉 후 세 순간의 자세를 분홍과 초록 뼈대로 겹쳐 그린 화면", caption: "임팩트 순간 맞추기 — 백스윙 · 접촉 · 접촉 후의 자세를 겹쳐 차이를 본다" }
-      - { type: image, src: "/assets/img/supersub/analysis-report.webp", alt: "등급과 점수, 근거 문장, 여섯 항목의 점수 도형이 있는 분석 리포트", caption: "분석 리포트 — 등급, 근거 문장, 여섯 항목의 점수. 내 프로필에서 다시 볼 수 있다" }
+      - type: images
+        items:
+          - { src: "/assets/img/supersub/analysis-tracking.webp", alt: "공을 차는 선수의 다리에 관절 선이 그려지고, 오른쪽에 분석 진행 단계가 보이는 화면", caption: "관절 추적 — 고른 선수의 관절을 따라가며 자세를 잰다. 오른쪽은 분석이 진행되는 단계" }
+          - { src: "/assets/img/supersub/analysis-compare.webp", alt: "기준 선수 영상과 올린 영상이 나란히 놓이고, 오른쪽에 등급과 근거 문장, 항목별 점수 도형이 보이는 화면", caption: "기준 선수와 비교 — 분홍이 기준 선수, 초록이 올린 영상. 오른쪽에 등급 · 근거 문장 · 항목별 점수" }
+      # 둘째 줄은 두 그림의 가로세로 비(1200×672 · 918×742)를 폭 비로 주어 높이를 맞춘다
+      - type: images
+        cols: "1.786fr 1.237fr"
+        items:
+          - { src: "/assets/img/supersub/analysis-moments.webp", alt: "백스윙, 접촉, 접촉 후 세 순간의 자세를 분홍과 초록 뼈대로 겹쳐 그린 화면", caption: "임팩트 순간 맞추기 — 백스윙 · 접촉 · 접촉 후의 자세를 겹쳐 차이를 본다" }
+          - { src: "/assets/img/supersub/analysis-report.webp", alt: "등급과 점수, 근거 문장, 여섯 항목의 점수 도형이 있는 분석 리포트", caption: "분석 리포트 — 등급, 근거 문장, 여섯 항목의 점수. 내 프로필에서 다시 볼 수 있다" }
 
   - title: "서비스 구성"
     text: "4명이 영역을 나눠 맡았습니다. 수치는 팀 문서의 2026-09-23 기준입니다."
@@ -134,18 +141,21 @@ sections:
   - title: "끝난 뒤에도 돌게 — 개인 사본"
     text: "팀 서비스는 AWS 에서 돌았습니다. 프로젝트가 끝나도 보여 줄 수 있도록, 팀 코드는 한 줄도 고치지 않고 전체를 내 PC 로 옮긴 사본을 따로 운영합니다. 위 「데모」는 그 사본의 화면을 예시 데이터로 늘 열어 둔 것입니다."
     blocks:
-      - type: compare
-        from_title: "팀(AWS)"
-        to_title: "개인 사본(내 PC)"
-        items:
-          - { from: "EC2", to: "k3s — PostgreSQL · 백엔드 · 화면" }
-          - { from: "S3", to: "MinIO — 환경 변수 하나(AWS_ENDPOINT_URL_S3)" }
-          - { from: "공인 IP", to: "Cloudflare 터널" }
-          - { from: "GPU 서버 T4 16GB", to: "RTX 3050 8GB — 추론 서버 없이 GPU 를 차례로" }
-      - { type: flow, items: ["백업 하나(비밀 값 · 데이터)", "새로 클론한 저장소", "깨끗한 환경에서 전체 복구"] }
-      - type: stats
-        items:
-          - { num: "약 1분 30초", label: "되살리기(기계 준비물이 있는 상태)" }
-      - { type: facts, items: ["첫 HEAD 요청만 403 → 백엔드만 클러스터 안에서 MinIO 에 직결", "화면 개인화는 빌드 때 패치로 — 「팀분석」 화면"] }
-      - { type: image, src: "/assets/img/supersub/team.webp", alt: "팀분석 화면 — 팀장·팀원 알약과 포메이션 판", caption: "팀분석 화면 — 팀장이 포메이션 판의 빈 자리를 채운다(시연 데이터)" }
+      - type: split
+        left:
+          - type: compare
+            from_title: "팀(AWS)"
+            to_title: "개인 사본(내 PC)"
+            items:
+              - { from: "EC2", to: "k3s — PostgreSQL · 백엔드 · 화면" }
+              - { from: "S3", to: "MinIO — 환경 변수 하나(AWS_ENDPOINT_URL_S3)" }
+              - { from: "공인 IP", to: "Cloudflare 터널" }
+              - { from: "GPU 서버 T4 16GB", to: "RTX 3050 8GB — 추론 서버 없이 GPU 를 차례로" }
+          - { type: flow, items: ["백업 하나(비밀 값 · 데이터)", "새로 클론한 저장소", "깨끗한 환경에서 전체 복구"] }
+          - type: stats
+            items:
+              - { num: "약 1분 30초", label: "되살리기(기계 준비물이 있는 상태)" }
+          - { type: facts, items: ["첫 HEAD 요청만 403 → 백엔드만 클러스터 안에서 MinIO 에 직결", "화면 개인화는 빌드 때 패치로 — 「팀분석」 화면"] }
+        right:
+          - { type: image, src: "/assets/img/supersub/team.webp", alt: "팀분석 화면 — 팀장·팀원 알약과 포메이션 판", caption: "팀분석 화면 — 팀장이 포메이션 판의 빈 자리를 채운다(시연 데이터)" }
 ---
