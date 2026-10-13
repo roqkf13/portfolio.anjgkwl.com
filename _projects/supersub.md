@@ -35,6 +35,16 @@ sections:
       - type: flow
         items: ["선수 카드", "포메이션 빈 자리 — AI 추천 · 지인 찾기", "경기 신청 · 수락", "알림"]
 
+  # 🔴 이 절의 그림 넷은 팀 시연 영상(팀 저장소 www/public 의 2분 영상)에서 자막 아래를 잘라 낸 장면이다(2026-10-13).
+  #    분석 AI · 화면은 팀원의 영역이라 「내가 한 일」 절에는 넣지 않는다. 설명은 그 영상의 자막에 있는 말만 쓴다
+  - title: "분석 결과 화면"
+    text: "영상을 올리고 분석할 선수를 고르면 관절을 따라가며 자세를 재고, 기준 선수와 나란히 놓아 차이를 보여 줍니다. 팀 시연 영상의 장면이고, 화면 속 영상은 시연용입니다."
+    blocks:
+      - { type: image, src: "/assets/img/supersub/analysis-tracking.webp", alt: "공을 차는 선수의 다리에 관절 선이 그려지고, 오른쪽에 분석 진행 단계가 보이는 화면", caption: "관절 추적 — 고른 선수의 관절을 따라가며 자세를 잰다. 오른쪽은 분석이 진행되는 단계" }
+      - { type: image, src: "/assets/img/supersub/analysis-compare.webp", alt: "기준 선수 영상과 올린 영상이 나란히 놓이고, 오른쪽에 등급과 근거 문장, 항목별 점수 도형이 보이는 화면", caption: "기준 선수와 비교 — 분홍이 기준 선수, 초록이 올린 영상. 오른쪽에 등급 · 근거 문장 · 항목별 점수" }
+      - { type: image, src: "/assets/img/supersub/analysis-moments.webp", alt: "백스윙, 접촉, 접촉 후 세 순간의 자세를 분홍과 초록 뼈대로 겹쳐 그린 화면", caption: "임팩트 순간 맞추기 — 백스윙 · 접촉 · 접촉 후의 자세를 겹쳐 차이를 본다" }
+      - { type: image, src: "/assets/img/supersub/analysis-report.webp", alt: "등급과 점수, 근거 문장, 여섯 항목의 점수 도형이 있는 분석 리포트", caption: "분석 리포트 — 등급, 근거 문장, 여섯 항목의 점수. 내 프로필에서 다시 볼 수 있다" }
+
   - title: "서비스 구성"
     text: "4명이 영역을 나눠 맡았습니다. 수치는 팀 문서의 2026-09-23 기준입니다."
     blocks:
