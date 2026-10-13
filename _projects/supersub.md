@@ -20,6 +20,9 @@ links:
   - label: "개인 사본 구성"
     url: "https://github.com/roqkf13/supersub-selfhost"
     note: "팀 서비스 전체를 개인 PC 에서 돌리는 인프라 코드입니다. 보여 주기용으로 추린 저장소라 팀 코드는 들어 있지 않습니다."
+  - label: "대회 참가작"
+    url: "https://event.wanted.co.kr/ai-championship/2026/projects/430"
+    note: "원티드 AI Championship 2026 에 팀으로 참가해 올린 페이지입니다."
 
 # 페이지 본문 — 그림 7 : 글 3(사용자, 2026-09-30). 절마다 text(왼쪽 글)와 blocks(오른쪽 그림 — _includes/vblocks.html)
 # 🔴 그림의 말 · 숫자는 팀 문서 · 저장소로 확인된 것만. 팀 main 에 들어간 것만 「내가 한 일」에 적는다(09-29)
