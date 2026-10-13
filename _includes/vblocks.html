@@ -11,8 +11,7 @@
 {%- when "flow" %}
 <div class="mflow">
   {%- for box in b.items %}
-  {%- unless forloop.first %}<span class="mflow__arrow" aria-hidden="true">→</span>{%- endunless %}
-  <span class="mbox">{{ box }}</span>
+  <span class="mflow__step">{%- unless forloop.first %}<span class="mflow__arrow" aria-hidden="true">→</span>{%- endunless %}<span class="mbox">{{ box }}</span></span>
   {%- endfor %}
 </div>
 {%- when "tiles" %}

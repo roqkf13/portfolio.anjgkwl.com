@@ -89,8 +89,7 @@ toc:
         <div class="mflow">
           <span class="tag">대회 일정</span>
           {%- for box in c.schedule %}
-          {%- unless forloop.first %}<span class="mflow__arrow" aria-hidden="true">→</span>{%- endunless %}
-          <span class="mbox">{{ box }}</span>
+          <span class="mflow__step">{%- unless forloop.first %}<span class="mflow__arrow" aria-hidden="true">→</span>{%- endunless %}<span class="mbox">{{ box }}</span></span>
           {%- endfor %}
         </div>
         {%- if c.facts %}
@@ -151,8 +150,7 @@ toc:
         {%- for row in a.flows %}
         <div class="mflow">
           {%- for box in row %}
-          {%- unless forloop.first %}<span class="mflow__arrow" aria-hidden="true">→</span>{%- endunless %}
-          <span class="mbox">{{ box }}</span>
+          <span class="mflow__step">{%- unless forloop.first %}<span class="mflow__arrow" aria-hidden="true">→</span>{%- endunless %}<span class="mbox">{{ box }}</span></span>
           {%- endfor %}
         </div>
         {%- endfor %}
